@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cornerstone: Active Recovery Platform
 
-## Getting Started
+## 🏛️ Mission
 
-First, run the development server:
+Cornerstone is an active recovery platform designed to replace addiction with structure. Unlike passive trackers that focus on avoidance (counting days), Cornerstone focuses on construction (building a life). It combines daily scheduling, habit formation, and spiritual grounding to help men build a life of purpose.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Database:** Vercel Postgres
+- **Auth:** NextAuth.js (v5)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📋 MVP Features (v0.1)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **User Identity:** Secure login to keep recovery data private.
+2.  **Daily Structure:** A "Today's Plan" dashboard to visualize the day's mission.
+3.  **Active Task Management:** Ability to add tasks with categories (Faith, Skill, Fitness).
+4.  **Visual Progress:** A simple mechanism to complete tasks and visualize daily wins.
+5.  **The Foundation:** A "Streak/Consistency" counter based on task completion, not just abstinence.
 
-## Learn More
+## 🗄️ Database Schema (MVP)
 
-To learn more about Next.js, take a look at the following resources:
+### Users Table
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Column     | Type    | Notes       |
+| :--------- | :------ | :---------- |
+| `id`       | UUID    | Primary Key |
+| `name`     | VARCHAR |             |
+| `email`    | VARCHAR | Unique      |
+| `password` | VARCHAR | Hashed      |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Tasks Table
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Column     | Type    | Notes                               |
+| :--------- | :------ | :---------------------------------- |
+| `id`       | UUID    | Primary Key                         |
+| `user_id`  | UUID    | Foreign Key (Links to Users)        |
+| `title`    | VARCHAR | The task description                |
+| `status`   | VARCHAR | 'pending' or 'completed'            |
+| `category` | VARCHAR | 'faith', 'fitness', 'skill', 'work' |
+| `date`     | DATE    | The scheduled date                  |
