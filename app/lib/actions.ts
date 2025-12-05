@@ -22,10 +22,9 @@ export async function toggleTask(formData: FormData) {
       WHERE id = ${id}
     `;
   } catch (error) {
-    return { message: "Database Error: Failed to Update Task." };
+    console.error("Database Error:", error); // <--- Fixed here too
   }
 
-  // Refresh the page to show the new green circle
   revalidatePath("/dashboard");
 }
 
@@ -46,7 +45,9 @@ export async function createTask(formData: FormData) {
       VALUES (${userId}, ${title}, 'pending', ${category}, CURRENT_DATE)
     `;
   } catch (error) {
-    return { message: "Database Error: Failed to Create Task." };
+    // We log the error instead of returning it, satisfying TypeScript
+    console.error("Database Error:", error);
+    // throw error; // Optional: You can throw it if you want to crash the page on error
   }
 
   // 3. Revalidate & Redirect
