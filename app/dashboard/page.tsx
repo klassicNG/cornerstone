@@ -1,6 +1,7 @@
 import { sql } from "@vercel/postgres";
 import Link from "next/link"; // Import this at the top
-import { createTask, toggleTask } from "@/app/lib/actions"; // Import the new action
+import { createTask, toggleTask, signOutUser } from "@/app/lib/actions"; // Import the new action
+import { calculateStreak } from "@/app/lib/utils";
 
 // 1. Define the Shape of your Data (TypeScript)
 interface Task {
@@ -20,6 +21,8 @@ export default async function Page() {
 
   const tasks = rows;
 
+  const streak = calculateStreak(tasks);
+
   return (
     <main className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
@@ -30,8 +33,14 @@ export default async function Page() {
             <p className="text-gray-500">Active Recovery Dashboard</p>
           </div>
           <div className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">
-            Streak: 0 Days
+            Streak: {streak} Days
           </div>
+          {/* New Sign Out Button */}
+          <form action={signOutUser}>
+            <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors">
+              Sign Out
+            </button>
+          </form>
         </div>
 
         {/* The "Today's Plan" Container */}

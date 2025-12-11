@@ -18,7 +18,7 @@ export default function Page() {
               type="text"
               required
               placeholder="e.g., Read Chapter 1, 30 mins Prayer"
-              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full p-2 border text-gray-500 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
             />
           </div>
 
@@ -29,7 +29,7 @@ export default function Page() {
             </label>
             <select
               name="category"
-              className="w-full p-2 border border-gray-300 rounded-md bg-white"
+              className="w-full p-2 border text-gray-500 border-gray-300 rounded-md bg-white"
             >
               <option value="work">Work / Deep Focus</option>
               <option value="faith">Faith / Spirit</option>
